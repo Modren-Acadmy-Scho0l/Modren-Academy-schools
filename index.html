@@ -2,113 +2,108 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>كرت معايدة المدرسة</title>
+<title>كرت معايدة</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
 
 <style>
-body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    direction: rtl;
+
+body{
+text-align:center;
+font-family:'Cairo',sans-serif;
+background:#f5f5f5;
+direction:rtl;
 }
 
-h1 {
-    margin-top: 30px;
-    color: #0a3d62; /* لون اسم المدرسة */
+input{
+padding:10px;
+font-size:18px;
+width:250px;
 }
 
-h2 {
-    margin-bottom: 20px;
+button{
+padding:10px 20px;
+font-size:18px;
+margin:5px;
+cursor:pointer;
 }
 
-input {
-    padding: 10px;
-    font-size: 18px;
-    width: 300px;
+.card{
+width:1080px;
+height:1920px;
+background:url("card.png") no-repeat center;
+background-size:cover;
+margin:auto;
+position:relative;
+display:none;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    margin: 5px;
+.name{
+position:absolute;
+top:1180px;   /* مكان الاسم حسب دائرتك */
+width:100%;
+font-size:70px;
+color:#004aad;
+font-weight:bold;
+text-align:center;
 }
 
-.card {
-    width: 1080px;   /* عدّل حسب عرض الصورة */
-    height: 1080px;   /* عدّل حسب ارتفاع الصورة */
-    background: url('card.png') no-repeat center;
-    background-size: cover;
-    margin: 30px auto;
-    position: relative;
-    display: none;
-    border-radius: 20px;
-}
-
-/* مكان الاسم داخل الكرت */
-.name {
-    position: absolute;
-    bottom: 200px;      /* المسافة من أسفل الصورة */
-    width: 100%;
-    font-size: 70px;    /* حجم الخط */
-    font-weight: bold;
-    color: #004aad;     /* اللون الأزرق */
-    text-align: center;
-}
 </style>
-
 </head>
+
 <body>
 
-<h1>مدارس الأكاديمية العصرية</h1>
-<h2>اكتب اسمك واستلم كرت المعايدة 🎉</h2>
+<h2>مدارس الأكاديمية العصرية</h2>
+<p>اكتب اسمك للحصول على كرت المعايدة</p>
 
-<input type="text" id="studentName" placeholder="اكتب اسمك هنا">
+<input id="studentName" placeholder="اكتب اسمك هنا">
 <br>
+
 <button onclick="generateCard()">إنشاء الكرت</button>
-<button onclick="downloadCard()">تحميل الكرت كصورة 📥</button>
+<button onclick="downloadCard()">تحميل الكرت</button>
 
 <div class="card" id="card">
-    <div class="name" id="nameDisplay"></div>
+<div class="name" id="nameDisplay"></div>
 </div>
 
-<!-- مكتبة html2canvas لتحويل الكرت لصورة -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
-function generateCard() {
-    var name = document.getElementById("studentName").value;
 
-    if(name.trim() === "") {
-        alert("اكتب اسمك أولاً");
-        return;
-    }
+function generateCard(){
 
-    document.getElementById("nameDisplay").innerText = name;
-    document.getElementById("card").style.display = "block";
+var name=document.getElementById("studentName").value;
+
+if(name===""){
+alert("اكتب اسمك");
+return;
 }
 
-function downloadCard() {
-    var card = document.getElementById("card");
+document.getElementById("nameDisplay").innerText=name;
 
-    if(card.style.display === "none") {
-        alert("أولاً أنشئ الكرت بكتابة الاسم!");
-        return;
-    }
+document.getElementById("card").style.display="block";
 
-    html2canvas(card).then(function(canvas) {
-        var link = document.createElement('a');
-        link.download = 'Eid_Card.png';  // اسم الصورة عند التحميل
-        link.href = canvas.toDataURL();
-        link.click();
-    });
 }
+
+function downloadCard(){
+
+var card=document.getElementById("card");
+
+html2canvas(card).then(function(canvas){
+
+var link=document.createElement("a");
+
+link.download="eid-card.png";
+
+link.href=canvas.toDataURL();
+
+link.click();
+
+});
+
+}
+
 </script>
 
 </body>
 </html>
-
-
-
-
-
